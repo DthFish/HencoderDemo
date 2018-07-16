@@ -13,7 +13,7 @@ import com.dthfish.hencoderdemo.Utils;
 
 /**
  * Description
- * Author zhaolizhi
+ * Author DthFish
  * Date  2018/7/16.
  */
 
