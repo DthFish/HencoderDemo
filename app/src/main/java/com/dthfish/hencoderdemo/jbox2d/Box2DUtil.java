@@ -1,5 +1,7 @@
 package com.dthfish.hencoderdemo.jbox2d;
 
+import android.util.Log;
+
 import org.jbox2d.collision.shapes.CircleShape;
 import org.jbox2d.collision.shapes.PolygonShape;
 import org.jbox2d.dynamics.Body;
@@ -43,7 +45,7 @@ public class Box2DUtil {
         BodyDef bodyDef = new BodyDef();
         bodyDef.setType(BodyType.DYNAMIC);
         bodyDef.position.set(x / Constant.RATE, y / Constant.RATE);
-
+        Log.d("createCircle", "createCircle: ");
         CircleShape shape = new CircleShape();
         shape.setRadius(radius / Constant.RATE);
         //设置系数

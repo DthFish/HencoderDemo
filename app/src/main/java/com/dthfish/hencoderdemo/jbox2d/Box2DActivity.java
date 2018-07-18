@@ -25,7 +25,6 @@ public class Box2DActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_box2_d);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -92,6 +91,10 @@ public class Box2DActivity extends AppCompatActivity {
                 }
 
             }
+
+
+        }
+        for (int i = 0; i < 16; i++) {
 
             CircleColor ball = Box2DUtil.createCircle(Constant.SCREEN_WIDTH / 2 - 24, kd * 30, kd / 2, mWorld,
                     Color.RED);
