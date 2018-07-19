@@ -1,6 +1,7 @@
 package com.dthfish.hencoderdemo.view;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -46,20 +47,11 @@ public class AvatarView extends View {
         int save = canvas.saveLayer(0, 0, getWidth(), getHeight(), paint);
         canvas.drawCircle(getWidth() / 2, getHeight() / 2, radius - PADDING, paint);
         paint.setXfermode(xfermode);
-        canvas.drawBitmap(getAvatar((int) radius * 2), getWidth() / 2 - radius, getHeight() / 2 - radius, paint);
+        canvas.drawBitmap(Utils.getAvatar(getResources(), R.drawable.huaji, (int) radius * 2), getWidth() / 2 - radius, getHeight() / 2 - radius, paint);
         paint.setXfermode(null);
 
         canvas.restoreToCount(save);
 
     }
 
-    public Bitmap getAvatar(int width) {
-        BitmapFactory.Options option = new BitmapFactory.Options();
-        option.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(getResources(), R.drawable.huaji, option);
-        option.inJustDecodeBounds = false;
-        option.inDensity = option.outWidth;
-        option.inTargetDensity = width;
-        return BitmapFactory.decodeResource(getResources(), R.drawable.huaji, option);
-    }
 }

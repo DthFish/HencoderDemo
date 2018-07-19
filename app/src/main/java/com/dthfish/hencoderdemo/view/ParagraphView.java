@@ -86,17 +86,7 @@ public class ParagraphView extends View {
             }
             count = paint.breakText(content, start, content.length(), true, textWidth, measuredWidth);
         }
-        canvas.drawBitmap(getAvatar(IMAGE_WIDTH), getWidth() - IMAGE_WIDTH, IMAGE_OFFSET, paint);
+        canvas.drawBitmap(Utils.getAvatar(getResources(), R.drawable.huaji, IMAGE_WIDTH), getWidth() - IMAGE_WIDTH, IMAGE_OFFSET, paint);
     }
 
-    private Bitmap getAvatar(int width) {
-
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeResource(getResources(), R.drawable.huaji, options);
-        options.inJustDecodeBounds = false;
-        options.inDensity = options.outWidth;
-        options.inTargetDensity = width;
-        return BitmapFactory.decodeResource(getResources(), R.drawable.huaji, options);
-    }
 }

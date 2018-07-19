@@ -10,20 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".MainActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
-        <activity android:name=".jbox2d.Box2DActivity" android:theme="@style/NoActionBarTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".jbox2d.Box2DActivity"
+            android:theme="@style/NoActionBarTheme">
+
+            <!--
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            -->
 
         </activity>
+        <activity android:name=".activity.CameraActivity" />
+        <activity android:name=".activity.AvatarActivity" />
+        <activity android:name=".activity.DashActivity" />
+        <activity android:name=".activity.ParagraphActivity" />
+        <activity android:name=".activity.PieChartActivity" />
+        <activity android:name=".activity.SportActivity"/>
     </application>
 
 </manifest>

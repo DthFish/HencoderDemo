@@ -1,7 +1,18 @@
 package com.dthfish.hencoderdemo;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+
+import com.dthfish.hencoderdemo.activity.AvatarActivity;
+import com.dthfish.hencoderdemo.activity.CameraActivity;
+import com.dthfish.hencoderdemo.activity.DashActivity;
+import com.dthfish.hencoderdemo.activity.ParagraphActivity;
+import com.dthfish.hencoderdemo.activity.PieChartActivity;
+import com.dthfish.hencoderdemo.activity.SportActivity;
+import com.dthfish.hencoderdemo.jbox2d.Box2DActivity;
+import com.dthfish.hencoderdemo.view.PieChart;
 
 import java.io.IOException;
 
@@ -19,7 +30,48 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        findViewById(R.id.btn_to_dash).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, DashActivity.class));
+            }
+        });
+        findViewById(R.id.btn_to_pie_chart).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, PieChartActivity.class));
+            }
+        });
+        findViewById(R.id.btn_to_sport).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, SportActivity.class));
+            }
+        });
+        findViewById(R.id.btn_to_avatar).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, AvatarActivity.class));
+            }
+        });
+        findViewById(R.id.btn_to_paragraph).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ParagraphActivity.class));
+            }
+        });
+        findViewById(R.id.btn_to_camera).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CameraActivity.class));
+            }
+        });
+        findViewById(R.id.btn_to_box2d).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, Box2DActivity.class));
+            }
+        });
 //        httpMethod();
 
 
