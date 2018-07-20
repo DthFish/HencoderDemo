@@ -34,7 +34,8 @@
         <activity android:name=".activity.DashActivity" />
         <activity android:name=".activity.ParagraphActivity" />
         <activity android:name=".activity.PieChartActivity" />
-        <activity android:name=".activity.SportActivity"/>
+        <activity android:name=".activity.SportActivity" />
+        <activity android:name=".activity.MaterialEditTextActivity"></activity>
     </application>
 
 </manifest>

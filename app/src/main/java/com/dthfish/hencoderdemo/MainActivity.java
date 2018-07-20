@@ -8,6 +8,7 @@ import android.view.View;
 import com.dthfish.hencoderdemo.activity.AvatarActivity;
 import com.dthfish.hencoderdemo.activity.CameraActivity;
 import com.dthfish.hencoderdemo.activity.DashActivity;
+import com.dthfish.hencoderdemo.activity.MaterialEditTextActivity;
 import com.dthfish.hencoderdemo.activity.ParagraphActivity;
 import com.dthfish.hencoderdemo.activity.PieChartActivity;
 import com.dthfish.hencoderdemo.activity.SportActivity;
@@ -70,6 +71,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, Box2DActivity.class));
+            }
+        });
+        findViewById(R.id.btn_to_material).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, MaterialEditTextActivity.class));
             }
         });
 //        httpMethod();

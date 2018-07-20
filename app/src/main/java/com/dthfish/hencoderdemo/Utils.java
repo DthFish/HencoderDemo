@@ -17,13 +17,13 @@ public class Utils {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp, Resources.getSystem().getDisplayMetrics());
     }
 
-    public static Bitmap getAvatar(Resources resource, int drawableId, int width) {
+    public static Bitmap getAvatar(Resources resource, int drawableId, float width) {
         BitmapFactory.Options option = new BitmapFactory.Options();
         option.inJustDecodeBounds = true;
         BitmapFactory.decodeResource(resource, drawableId, option);
         option.inJustDecodeBounds = false;
         option.inDensity = option.outWidth;
-        option.inTargetDensity = width;
+        option.inTargetDensity = (int) width;
         return BitmapFactory.decodeResource(resource, drawableId, option);
     }
 
