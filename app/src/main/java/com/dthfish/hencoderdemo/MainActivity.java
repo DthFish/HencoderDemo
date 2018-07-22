@@ -7,6 +7,7 @@ import android.view.View;
 
 import com.dthfish.hencoderdemo.activity.AvatarActivity;
 import com.dthfish.hencoderdemo.activity.CameraActivity;
+import com.dthfish.hencoderdemo.activity.CustomViewActivity;
 import com.dthfish.hencoderdemo.activity.DashActivity;
 import com.dthfish.hencoderdemo.activity.MaterialEditTextActivity;
 import com.dthfish.hencoderdemo.activity.ParagraphActivity;
@@ -77,6 +78,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, MaterialEditTextActivity.class));
+            }
+        });
+        findViewById(R.id.btn_to_custom).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, CustomViewActivity.class));
             }
         });
 //        httpMethod();

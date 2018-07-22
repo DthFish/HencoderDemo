@@ -35,7 +35,8 @@
         <activity android:name=".activity.ParagraphActivity" />
         <activity android:name=".activity.PieChartActivity" />
         <activity android:name=".activity.SportActivity" />
-        <activity android:name=".activity.MaterialEditTextActivity"></activity>
+        <activity android:name=".activity.MaterialEditTextActivity" />
+        <activity android:name=".activity.CustomViewActivity"></activity>
     </application>
 
 </manifest>
