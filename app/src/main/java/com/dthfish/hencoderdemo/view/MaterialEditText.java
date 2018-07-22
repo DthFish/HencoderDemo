@@ -7,6 +7,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.support.annotation.DrawableRes;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -16,7 +17,7 @@ import com.dthfish.hencoderdemo.R;
 import com.dthfish.hencoderdemo.Utils;
 
 /**
- * Description 这个只是练习的 Demo 不能直接使用到项目中
+ * Description
  * Author DthFish
  * Date  2018/7/20.
  */
@@ -62,22 +63,21 @@ public class MaterialEditText extends AppCompatEditText {
         TypedArray typedArrayAccent = context.obtainStyledAttributes(attrs, new int[]{android.R.attr.colorAccent});
         accentColor = typedArrayAccent.getColor(0, Color.BLACK);
         typedArrayAccent.recycle();
-        if (useFloatingLabel) {
-            setPadding((int) (getPaddingLeft() + getIconOffset()), (int) (getPaddingTop() + LABEL_SIZE + LABEL_OFFSET_Y),
-                    getPaddingRight(), getPaddingBottom());
-            addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                }
+        addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                @Override
-                public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
 
-                }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                @Override
-                public void afterTextChanged(Editable s) {
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (useFloatingLabel) {
                     if (s.length() > 0) {
                         if (!labelShow) {
                             labelShow = true;
@@ -88,7 +88,12 @@ public class MaterialEditText extends AppCompatEditText {
                         getAnimator().reverse();
                     }
                 }
-            });
+            }
+        });
+
+        if (useFloatingLabel) {
+            setPadding((int) (getPaddingLeft() + getIconOffset()), (int) (getPaddingTop() + LABEL_SIZE + LABEL_OFFSET_Y),
+                    getPaddingRight(), getPaddingBottom());
 
         } else if (leftIcon != 0) {
             setPadding((int) (getPaddingLeft() + getIconOffset()), getPaddingTop(),
@@ -101,6 +106,27 @@ public class MaterialEditText extends AppCompatEditText {
     {
         setBackground(null);
         paint.setTextSize(LABEL_SIZE);
+
+    }
+
+
+    public int getLeftIcon() {
+        return leftIcon;
+    }
+
+    public void setLeftIcon(@DrawableRes int leftIcon) {
+        float prePaddingLeftOffset = (int) getIconOffset();
+        this.leftIcon = leftIcon;
+        if (leftIcon == 0) {
+            if (leftBitmap != null)
+                leftBitmap.recycle();
+            leftBitmap = null;
+        } else {
+            leftBitmap = Utils.getAvatar(getResources(), leftIcon, getTextSize() * 1.5f);
+        }
+
+        setPadding((int) (getPaddingLeft() - prePaddingLeftOffset + getIconOffset()), getPaddingTop(),
+                getPaddingRight(), getPaddingBottom());
 
     }
 
@@ -126,8 +152,12 @@ public class MaterialEditText extends AppCompatEditText {
     }
 
     public void setUseFloatingLabel(boolean useFloatingLabel) {
+        float prePaddingTopOffset = this.useFloatingLabel ? LABEL_SIZE + LABEL_OFFSET_Y : 0f;
+        float paddingTopOffset = useFloatingLabel ? LABEL_SIZE + LABEL_OFFSET_Y : 0f;
         this.useFloatingLabel = useFloatingLabel;
-        requestLayout();
+
+        setPadding(getPaddingLeft(), (int) (getPaddingTop() - prePaddingTopOffset + paddingTopOffset),
+                getPaddingRight(), getPaddingBottom());
     }
 
     private float getIconOffset() {
