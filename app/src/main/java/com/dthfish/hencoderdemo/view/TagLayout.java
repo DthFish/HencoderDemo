@@ -3,7 +3,6 @@ package com.dthfish.hencoderdemo.view;
 import android.content.Context;
 import android.graphics.Rect;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -79,7 +78,7 @@ public class TagLayout extends ViewGroup {
             childRect.offset(layoutParams.leftMargin, layoutParams.topMargin);
             maxHeight = Math.max(maxHeight, child.getMeasuredHeight() + layoutParams.topMargin + layoutParams.bottomMargin);
             widthUsed += child.getMeasuredWidth() + layoutParams.leftMargin + layoutParams.rightMargin;
-            totalWidthUsed += Math.max(totalWidthUsed, widthUsed);
+            totalWidthUsed = Math.max(totalWidthUsed, widthUsed);
 
         }
         int width = totalWidthUsed;
