@@ -13,8 +13,10 @@ import com.dthfish.hencoderdemo.activity.MaterialEditTextActivity;
 import com.dthfish.hencoderdemo.activity.ParagraphActivity;
 import com.dthfish.hencoderdemo.activity.PieChartActivity;
 import com.dthfish.hencoderdemo.activity.SportActivity;
+import com.dthfish.hencoderdemo.activity.TagLayoutActivity;
 import com.dthfish.hencoderdemo.jbox2d.Box2DActivity;
 import com.dthfish.hencoderdemo.view.PieChart;
+import com.dthfish.hencoderdemo.view.TagLayout;
 
 import java.io.IOException;
 
@@ -84,6 +86,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, CustomViewActivity.class));
+            }
+        });
+        findViewById(R.id.btn_to_tag).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, TagLayoutActivity.class));
             }
         });
 //        httpMethod();

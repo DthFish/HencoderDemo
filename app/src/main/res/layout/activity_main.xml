@@ -64,6 +64,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Custom" />
+
+        <Button
+            android:id="@+id/btn_to_tag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="TagLayout" />
     </LinearLayout>
 
 </ScrollView>
