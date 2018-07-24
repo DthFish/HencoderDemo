@@ -5,7 +5,6 @@ import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import java.util.Arrays;
 
@@ -47,16 +46,19 @@ public class TagLayout extends ViewGroup {
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);
             Rect childRect = childrenRects[i];
+            // 方案1：widthUsed 填 0，让子 view 放飞自我尽情测量，不需要考虑已经剩余的宽度；不需要对 textview 单独处理
+            measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, heightUsed);
 
-            measureChildWithMargins(child, widthMeasureSpec, widthUsed, heightMeasureSpec, heightUsed);
             int tempWidth = child.getMeasuredWidth();
-            // todo: 目前只支持单行文字，还需要对文字长度比 TagLayout 宽度长的情况进行处理
-            // {#tempWidth}这里主要是针对 TextView wrap_content 的时候会截断文字进行的处理
-            if (TextView.class.isAssignableFrom(child.getClass())) {
-                TextView textView = (TextView) child;
-                tempWidth = (int) (textView.getPaint().measureText(textView.getText().toString())
-                        + textView.getPaddingLeft() + textView.getPaddingRight());
-            }
+//            // 方案2：51行的位置 widthUsed 参数填 widthUsed 累加值
+//            // 目前只支持单行文字，还需要对文字长度比 TagLayout 宽度长的情况进行处理
+//            // {#tempWidth}这里主要是针对 TextView wrap_content 的时候会截断文字进行的处理
+//            if (TextView.class.isAssignableFrom(child.getClass())) {
+//                TextView textView = (TextView) child;
+//                tempWidth = (int) (textView.getPaint().measureText(textView.getText().toString())
+//                        + textView.getPaddingLeft() + textView.getPaddingRight());
+//            }
+
             MarginLayoutParams layoutParams = (MarginLayoutParams) child.getLayoutParams();
             if (MeasureSpec.getMode(widthMeasureSpec) != MeasureSpec.UNSPECIFIED &&
                     ((tempWidth + widthUsed + layoutParams.leftMargin + layoutParams.rightMargin
@@ -69,6 +71,8 @@ public class TagLayout extends ViewGroup {
                 maxHeight = 0;
                 measureChildWithMargins(child, widthMeasureSpec, widthUsed, heightMeasureSpec, heightUsed);
             }
+
+
             if (childRect == null) {
                 childRect = childrenRects[i] = new Rect();
             }
