@@ -52,7 +52,7 @@ public class TagLayout extends ViewGroup {
             int tempWidth = child.getMeasuredWidth();
             // todo: 目前只支持单行文字，还需要对文字长度比 TagLayout 宽度长的情况进行处理
             // {#tempWidth}这里主要是针对 TextView wrap_content 的时候会截断文字进行的处理
-            if ((TextView.class.isAssignableFrom(child.getClass()) || child instanceof TextView)) {
+            if (TextView.class.isAssignableFrom(child.getClass())) {
                 TextView textView = (TextView) child;
                 tempWidth = (int) (textView.getPaint().measureText(textView.getText().toString())
                         + textView.getPaddingLeft() + textView.getPaddingRight());
