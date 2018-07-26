@@ -46,7 +46,8 @@ public class TagLayout extends ViewGroup {
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);
             Rect childRect = childrenRects[i];
-            // 推荐方案1：widthUsed 填 0，让子 view 放飞自我尽情测量，不需要考虑已经剩余的宽度；不需要对 textview 单独处理
+            // 推荐方案1：widthUsed 填 0，让子 view 放飞自我尽情测量，不需要考虑剩余的宽度，
+            // 最大宽度可以为 TagLayout 的宽度减去 （getPaddingStart + getPaddingEnd）；对比方案2，不需要对 textview 单独处理
             measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, heightUsed);
 
             int tempWidth = child.getMeasuredWidth();
@@ -59,6 +60,8 @@ public class TagLayout extends ViewGroup {
 //                        + textView.getPaddingLeft() + textView.getPaddingRight());
 //            }
             MarginLayoutParams layoutParams = (MarginLayoutParams) child.getLayoutParams();
+            // 如果要支持 margin，这里判断是否需要换行的时候要加上左右 margin，
+            // 因为{ measureChildWithMargins } 里面的代码可以知道，子 view 的宽度是没有包含 margin 的
             if (MeasureSpec.getMode(widthMeasureSpec) != MeasureSpec.UNSPECIFIED &&
                     ((tempWidth + widthUsed + layoutParams.leftMargin + layoutParams.rightMargin
                             + getPaddingStart() + getPaddingEnd() >
