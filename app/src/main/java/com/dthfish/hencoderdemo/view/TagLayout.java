@@ -46,7 +46,7 @@ public class TagLayout extends ViewGroup {
         for (int i = 0; i < childCount; i++) {
             View child = getChildAt(i);
             Rect childRect = childrenRects[i];
-            // 方案1：widthUsed 填 0，让子 view 放飞自我尽情测量，不需要考虑已经剩余的宽度；不需要对 textview 单独处理
+            // 推荐方案1：widthUsed 填 0，让子 view 放飞自我尽情测量，不需要考虑已经剩余的宽度；不需要对 textview 单独处理
             measureChildWithMargins(child, widthMeasureSpec, 0, heightMeasureSpec, heightUsed);
 
             int tempWidth = child.getMeasuredWidth();
@@ -58,7 +58,6 @@ public class TagLayout extends ViewGroup {
 //                tempWidth = (int) (textView.getPaint().measureText(textView.getText().toString())
 //                        + textView.getPaddingLeft() + textView.getPaddingRight());
 //            }
-
             MarginLayoutParams layoutParams = (MarginLayoutParams) child.getLayoutParams();
             if (MeasureSpec.getMode(widthMeasureSpec) != MeasureSpec.UNSPECIFIED &&
                     ((tempWidth + widthUsed + layoutParams.leftMargin + layoutParams.rightMargin

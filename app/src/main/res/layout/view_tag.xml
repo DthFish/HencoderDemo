@@ -7,5 +7,4 @@
     android:background="@drawable/bg_tag"
     android:ellipsize="none"
     android:padding="6dp"
-    android:singleLine="true"
     tools:text="哈哈哈" />
