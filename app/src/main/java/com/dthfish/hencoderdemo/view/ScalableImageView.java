@@ -9,8 +9,10 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.OverScroller;
 
@@ -23,7 +25,7 @@ import com.dthfish.hencoderdemo.Utils;
  * Date  2018/7/27.
  */
 public class ScalableImageView extends View implements GestureDetector.OnGestureListener,
-        GestureDetector.OnDoubleTapListener, Runnable {
+        GestureDetector.OnDoubleTapListener, Runnable, ScaleGestureDetector.OnScaleGestureListener {
     public static final float IMAGE_SIZE = Utils.dpToPx(400);
     private Bitmap bitmap;
     private Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -31,9 +33,12 @@ public class ScalableImageView extends View implements GestureDetector.OnGesture
     private float bitmapWidth;
     private float smallScale = 0;
     private float bigScale = 0;
+    private float currentScale = 0;
+    private float savedCurrentScale = 0;
+
     private GestureDetector gestureDetector;
+    private ScaleGestureDetector scaleGestureDetector;
     private boolean isBig;
-    private float faction;
     private ObjectAnimator animator;
     private float touchOffsetX;
     private float touchOffsetY;
@@ -54,6 +59,7 @@ public class ScalableImageView extends View implements GestureDetector.OnGesture
         bitmap = Utils.getAvatar(getResources(), R.drawable.beijing, IMAGE_SIZE);
         gestureDetector = new GestureDetector(context, this);
         gestureDetector.setOnDoubleTapListener(this);
+        scaleGestureDetector = new ScaleGestureDetector(context, this);
         scroller = new OverScroller(context);
     }
 
@@ -70,12 +76,14 @@ public class ScalableImageView extends View implements GestureDetector.OnGesture
             bigScale = getWidth() / bitmapWidth;
             smallScale = getHeight() / bitmapHeight;
         }
+        currentScale = smallScale;
     }
 
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        float tempScale = smallScale + (bigScale - smallScale) * faction;
+        float tempScale = currentScale;
+        float faction = (currentScale - smallScale) / (bigScale - smallScale);
         canvas.translate(touchOffsetX * faction, touchOffsetY * faction);
         canvas.translate(getWidth() / 2, getHeight() / 2);
         canvas.scale(tempScale, tempScale, 0, 0);
@@ -84,12 +92,36 @@ public class ScalableImageView extends View implements GestureDetector.OnGesture
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
+        if (event.getPointerCount() > 1) {
+            return scaleGestureDetector.onTouchEvent(event);
+        }
         return gestureDetector.onTouchEvent(event);
+    }
+
+    @SuppressWarnings("unused")
+    public float getCurrentScale() {
+        return currentScale;
+    }
+
+    @SuppressWarnings("unused")
+    public void setCurrentScale(float currentScale) {
+        float fixedCurrentScale = currentScale;
+        if (currentScale < smallScale) {
+            fixedCurrentScale = smallScale;
+            isBig = false;
+        } else if (currentScale > bigScale) {
+            fixedCurrentScale = bigScale;
+            isBig = true;
+        }
+        this.currentScale = fixedCurrentScale;
+        invalidate();
     }
 
     public ObjectAnimator getAnimator() {
         if (animator == null) {
-            animator = ObjectAnimator.ofFloat(this, "faction", 0f, 1f);
+            animator = ObjectAnimator.ofFloat(this, "currentScale", smallScale, bigScale);
+            animator.setFloatValues();
             animator.addListener(new AnimatorListenerAdapter() {
 
                 @Override
@@ -176,17 +208,6 @@ public class ScalableImageView extends View implements GestureDetector.OnGesture
         return false;
     }
 
-    @SuppressWarnings("unused")
-    public float getFaction() {
-        return faction;
-    }
-
-    @SuppressWarnings("unused")
-    public void setFaction(float faction) {
-        this.faction = faction;
-        invalidate();
-    }
-
     @Override
     public void run() {
         if (scroller.computeScrollOffset()) {
@@ -195,5 +216,24 @@ public class ScalableImageView extends View implements GestureDetector.OnGesture
             invalidate();
             postOnAnimation(this);
         }
+    }
+
+    @Override
+    public boolean onScale(ScaleGestureDetector detector) {
+        setCurrentScale(savedCurrentScale * detector.getScaleFactor());
+        return false;
+    }
+
+    @Override
+    public boolean onScaleBegin(ScaleGestureDetector detector) {
+        savedCurrentScale = currentScale;
+        touchOffsetX = getWidth() / 2 - detector.getFocusX();
+        touchOffsetY = getHeight() / 2 - detector.getFocusY();
+        rectifyOffset();
+        return true;
+    }
+
+    @Override
+    public void onScaleEnd(ScaleGestureDetector detector) {
     }
 }
