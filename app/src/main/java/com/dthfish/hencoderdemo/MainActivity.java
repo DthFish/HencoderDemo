@@ -1,8 +1,8 @@
 package com.dthfish.hencoderdemo;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
 import com.dthfish.hencoderdemo.activity.AvatarActivity;
@@ -12,11 +12,10 @@ import com.dthfish.hencoderdemo.activity.DashActivity;
 import com.dthfish.hencoderdemo.activity.MaterialEditTextActivity;
 import com.dthfish.hencoderdemo.activity.ParagraphActivity;
 import com.dthfish.hencoderdemo.activity.PieChartActivity;
+import com.dthfish.hencoderdemo.activity.ScalableImageActivity;
 import com.dthfish.hencoderdemo.activity.SportActivity;
 import com.dthfish.hencoderdemo.activity.TagLayoutActivity;
 import com.dthfish.hencoderdemo.jbox2d.Box2DActivity;
-import com.dthfish.hencoderdemo.view.PieChart;
-import com.dthfish.hencoderdemo.view.TagLayout;
 
 import java.io.IOException;
 
@@ -92,6 +91,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, TagLayoutActivity.class));
+            }
+        });
+        findViewById(R.id.btn_to_scalable_image).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, ScalableImageActivity.class));
             }
         });
 //        httpMethod();

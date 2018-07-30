@@ -37,7 +37,8 @@
         <activity android:name=".activity.SportActivity" />
         <activity android:name=".activity.MaterialEditTextActivity" />
         <activity android:name=".activity.CustomViewActivity" />
-        <activity android:name=".activity.TagLayoutActivity"/>
+        <activity android:name=".activity.TagLayoutActivity" />
+        <activity android:name=".activity.ScalableImageActivity"></activity>
     </application>
 
 </manifest>
