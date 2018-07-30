@@ -121,7 +121,6 @@ public class ScalableImageView extends View implements GestureDetector.OnGesture
     public ObjectAnimator getAnimator() {
         if (animator == null) {
             animator = ObjectAnimator.ofFloat(this, "currentScale", smallScale, bigScale);
-            animator.setFloatValues();
             animator.addListener(new AnimatorListenerAdapter() {
 
                 @Override
