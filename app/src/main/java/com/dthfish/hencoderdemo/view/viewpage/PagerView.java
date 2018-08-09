@@ -14,6 +14,8 @@ import android.widget.OverScroller;
 
 /**
  * Description ViewGroup，类似 ViewPager 但是没有蛋疼的刷新机制
+ * 目的是用于不用重构太多，来替换公司原先用 Visible 和 Gone 来实现的面板切换需求
+ * ps:业务太多了，我不敢下手，算了我还是重新写个 ViewGroup 吧
  * Author DthFish
  * Date  2018/8/9.
  */
