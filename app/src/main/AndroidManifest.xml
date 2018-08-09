@@ -38,7 +38,8 @@
         <activity android:name=".activity.MaterialEditTextActivity" />
         <activity android:name=".activity.CustomViewActivity" />
         <activity android:name=".activity.TagLayoutActivity" />
-        <activity android:name=".activity.ScalableImageActivity"/>
+        <activity android:name=".activity.ScalableImageActivity" />
+        <activity android:name=".activity.PagerViewActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activity.PagerViewActivity">
+
+    <com.dthfish.hencoderdemo.view.viewpage.PagerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <com.dthfish.hencoderdemo.view.viewpage.ChildViewPager
+            android:id="@+id/cvp_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <com.dthfish.hencoderdemo.view.viewpage.ChildViewPager
+            android:id="@+id/cvp_two"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.dthfish.hencoderdemo.view.viewpage.PagerView>
+
+</FrameLayout>
