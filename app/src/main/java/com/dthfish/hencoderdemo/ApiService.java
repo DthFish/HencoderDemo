@@ -2,6 +2,8 @@ package com.dthfish.hencoderdemo;
 
 import android.support.annotation.Nullable;
 
+import io.reactivex.Observable;
+import io.reactivex.Single;
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -14,4 +16,7 @@ import retrofit2.http.GET;
 public interface ApiService {
     @GET("ddd/dd")
     Call<String> getText(@Nullable String s);
+
+    @GET("sss/ss")
+    Observable<String> getObservable();
 }

@@ -75,22 +75,60 @@ public class PagerView extends ViewGroup {
         boolean result = false;
         switch (ev.getActionMasked()) {
             case MotionEvent.ACTION_DOWN:
+                scrolling = false;
                 downX = ev.getX();
                 downY = ev.getY();
                 downScrollX = getScrollX();
                 break;
             case MotionEvent.ACTION_MOVE:
                 float dx = downX - ev.getX();
-                if (!scrolling) {
-                    if (Math.abs(dx) > viewConfiguration.getScaledPagingTouchSlop()) {
+                if (!canScroll(this, false, (int) -dx, (int) ev.getX(), (int) ev.getY()) && !scrolling) {
+                    int childCount = getChildCount();
+                    if (Math.abs(dx) > viewConfiguration.getScaledPagingTouchSlop() * 1.5f &&
+                            ((dx > 0 && currentPage < childCount - 1) || (dx < 0 && currentPage > 0))) {
                         scrolling = true;
-                        getParent().requestDisallowInterceptTouchEvent(true);
                         result = true;
                     }
                 }
                 break;
         }
         return result;
+    }
+
+    protected boolean canScroll(View v, boolean checkV, int dx, int x, int y) {
+        if (v instanceof ViewGroup) {
+            final ViewGroup group = (ViewGroup) v;
+            final int scrollX = v.getScrollX();
+            final int scrollY = v.getScrollY();
+            final int count = group.getChildCount();
+            for (int i = count - 1; i >= 0; i--) {
+                final View child = group.getChildAt(i);
+                if (x + scrollX >= child.getLeft() && x + scrollX < child.getRight()
+                        && y + scrollY >= child.getTop() && y + scrollY < child.getBottom()
+                        && canScroll(child, true, dx, x + scrollX - child.getLeft(),
+                        y + scrollY - child.getTop())) {
+                    return true;
+                }
+            }
+        }
+        return checkV && v.canScrollHorizontally(-dx);
+    }
+
+    @Override
+    public boolean canScrollHorizontally(int direction) {
+        if (getChildCount() <= 1) {
+            return false;
+        }
+        final int width = getWidth();
+        final int scrollX = getScrollX();
+        int childCount = getChildCount();
+        if (direction < 0) {
+            return (scrollX > 0);
+        } else if (direction > 0) {
+            return (scrollX < width * childCount - 1);
+        } else {
+            return false;
+        }
     }
 
     @Override
@@ -106,7 +144,6 @@ public class PagerView extends ViewGroup {
                 downX = event.getX();
                 downY = event.getY();
                 downScrollX = getScrollX();
-                break;
             case MotionEvent.ACTION_MOVE:
                 float dx = downX - event.getX() + downScrollX;
                 if (childCount > 1) {
@@ -116,11 +153,11 @@ public class PagerView extends ViewGroup {
                         dx = 0;
                     }
                     scrollTo((int) (dx), 0);
+                    return true;
                 }
                 break;
             case MotionEvent.ACTION_UP:
-                scrolling = false;
-                getParent().requestDisallowInterceptTouchEvent(false);
+
                 if (childCount > 1) {
                     velocityTracker.computeCurrentVelocity(1000, maxVelocity);
                     float vx = velocityTracker.getXVelocity();
@@ -140,10 +177,11 @@ public class PagerView extends ViewGroup {
                     int scrollDistance = targetPage * getWidth() - scrollX;
                     overScroller.startScroll(getScrollX(), 0, scrollDistance, 0);
                     ViewCompat.postInvalidateOnAnimation(this);
+                    return true;
                 }
                 break;
         }
-        return true;
+        return false;
     }
 
     @Override
