@@ -4,4 +4,9 @@
         <attr name="useFloatingLabel" format="boolean" />
         <attr name="leftIcon" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="ScaleAnimLayout">
+        <attr name="duration" format="integer" />
+        <attr name="scaleRatio" format="float" />
+    </declare-styleable>
 </resources>

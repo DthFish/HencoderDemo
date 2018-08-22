@@ -82,6 +82,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="PagerView" />
+
+        <Button
+            android:id="@+id/btn_to_scale_anim"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ScaleAnimLayout" />
+
+
     </LinearLayout>
 
 </ScrollView>
