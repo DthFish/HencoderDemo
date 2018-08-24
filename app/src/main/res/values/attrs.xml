@@ -5,8 +5,11 @@
         <attr name="leftIcon" format="reference" />
     </declare-styleable>
 
-    <declare-styleable name="ScaleAnimLayout">
+    <declare-styleable name="TouchAnimLayout">
         <attr name="duration" format="integer" />
         <attr name="scaleRatio" format="float" />
+        <attr name="rotateDegree" format="float" />
+        <attr name="translationXRatio" format="float" />
+        <attr name="translationYRatio" format="float" />
     </declare-styleable>
 </resources>

@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.dthfish.hencoderdemo.R;
 
-public class ScaleAnimActivity extends AppCompatActivity {
+public class TouchAnimActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

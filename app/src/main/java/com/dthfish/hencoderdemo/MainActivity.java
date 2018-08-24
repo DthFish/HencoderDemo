@@ -14,7 +14,7 @@ import com.dthfish.hencoderdemo.activity.PagerViewActivity;
 import com.dthfish.hencoderdemo.activity.ParagraphActivity;
 import com.dthfish.hencoderdemo.activity.PieChartActivity;
 import com.dthfish.hencoderdemo.activity.ScalableImageActivity;
-import com.dthfish.hencoderdemo.activity.ScaleAnimActivity;
+import com.dthfish.hencoderdemo.activity.TouchAnimActivity;
 import com.dthfish.hencoderdemo.activity.SportActivity;
 import com.dthfish.hencoderdemo.activity.TagLayoutActivity;
 import com.dthfish.hencoderdemo.jbox2d.Box2DActivity;
@@ -22,7 +22,6 @@ import com.dthfish.hencoderdemo.jbox2d.Box2DActivity;
 import java.io.IOException;
 
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
@@ -113,10 +112,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, PagerViewActivity.class));
             }
         });
-        findViewById(R.id.btn_to_scale_anim).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.btn_to_touch_anim).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, ScaleAnimActivity.class));
+                startActivity(new Intent(MainActivity.this, TouchAnimActivity.class));
             }
         });
 

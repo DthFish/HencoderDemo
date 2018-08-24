@@ -84,10 +84,10 @@
             android:text="PagerView" />
 
         <Button
-            android:id="@+id/btn_to_scale_anim"
+            android:id="@+id/btn_to_touch_anim"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ScaleAnimLayout" />
+            android:text="TouchAnimLayout" />
 
 
     </LinearLayout>
