@@ -10,6 +10,6 @@ public class TouchAnimActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_scale_anim);
+        setContentView(R.layout.activity_touch_anim);
     }
 }

@@ -67,4 +67,21 @@
 
     </com.dthfish.hencoderdemo.view.TouchAnimLayout>
 
+    <com.dthfish.hencoderdemo.view.TouchAnimLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:rotateDegree="360"
+        app:scaleRatio="1.2"
+        app:translationYRatio="-0.1">
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/icon_live" />
+
+    </com.dthfish.hencoderdemo.view.TouchAnimLayout>
+
 </LinearLayout>
