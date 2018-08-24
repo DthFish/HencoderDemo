@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Animation;
 import android.view.animation.DecelerateInterpolator;
+import android.view.animation.Interpolator;
 import android.view.animation.ScaleAnimation;
 import android.widget.LinearLayout;
 
@@ -21,8 +22,8 @@ import com.dthfish.hencoderdemo.R;
  */
 public class ScaleAnimLayout extends LinearLayout implements View.OnTouchListener {
     private ScaleAnimation scaleAnimation;
-    private ObserveInterpolator observeInterpolator;
-    private DecelerateInterpolator decelerateInterpolator = new DecelerateInterpolator();
+    private DecorateInterpolator startInterpolator;
+    private Interpolator reverseInterpolator = new DecelerateInterpolator();
     private float startAnimationProgress = 0;
     private float scaleRatio = 1.2f;
     private int duration = 100;
@@ -46,14 +47,15 @@ public class ScaleAnimLayout extends LinearLayout implements View.OnTouchListene
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         scaleAnimation.setFillAfter(true);
         scaleAnimation.setDuration(duration);
-        observeInterpolator = new ObserveInterpolator();
-        observeInterpolator.setListener(new OnProgressListener() {
+
+        startInterpolator = new DecorateInterpolator(new AccelerateInterpolator());
+        startInterpolator.setListener(new OnProgressListener() {
             @Override
             public void onProgress(float progress) {
                 startAnimationProgress = progress;
             }
         });
-        scaleAnimation.setInterpolator(observeInterpolator);
+        scaleAnimation.setInterpolator(startInterpolator);
         setClickable(true);
         setOnTouchListener(this);
 
@@ -69,7 +71,7 @@ public class ScaleAnimLayout extends LinearLayout implements View.OnTouchListene
         scaleAnimation = new ScaleAnimation(1, scaleRatio, 1, scaleRatio,
                 Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
         scaleAnimation.setFillAfter(true);
-        scaleAnimation.setInterpolator(observeInterpolator);
+        scaleAnimation.setInterpolator(startInterpolator);
         scaleAnimation.setDuration(duration);
 
     }
@@ -91,7 +93,7 @@ public class ScaleAnimLayout extends LinearLayout implements View.OnTouchListene
                 ScaleAnimation reverseAnimation = new ScaleAnimation(currentScaleRatio, 1, currentScaleRatio, 1,
                         Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
                 reverseAnimation.setDuration(durationMillis);
-                reverseAnimation.setInterpolator(decelerateInterpolator);
+                reverseAnimation.setInterpolator(reverseInterpolator);
                 startAnimation(reverseAnimation);
 
                 break;
@@ -104,19 +106,27 @@ public class ScaleAnimLayout extends LinearLayout implements View.OnTouchListene
         void onProgress(float progress);
     }
 
-    public static class ObserveInterpolator extends AccelerateInterpolator {
+    public static class DecorateInterpolator implements Interpolator {
+
+        private final Interpolator origin;
         private OnProgressListener listener;
 
+        public DecorateInterpolator(Interpolator origin) {
+            this.origin = origin;
+        }
+
         @Override
-        public float getInterpolation(float t) {
+        public float getInterpolation(float input) {
             if (listener != null) {
-                listener.onProgress(t);
+                listener.onProgress(input);
             }
-            return super.getInterpolation(t);
+
+            return origin.getInterpolation(input);
         }
 
         public void setListener(OnProgressListener listener) {
             this.listener = listener;
         }
     }
+
 }
