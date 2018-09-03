@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'com.dthfish.plugindemo'
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -16,6 +16,11 @@ android {
         }
     }
 }
+
+person {
+    name "DthFish"
+}
+
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
