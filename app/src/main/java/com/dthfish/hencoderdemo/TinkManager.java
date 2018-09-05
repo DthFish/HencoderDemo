@@ -31,13 +31,12 @@ import io.reactivex.schedulers.Schedulers;
  * Date  2018/9/5.
  */
 public class TinkManager {
-    private static TinkManager sInstance;
-    private Context mContext;
-    private KeysetHandle mKeysetHandle;
     private static final String ASSOCIATED_DATA = "DTHFISH";
     private static final String TAG = "TinkManager";
-
     private static final String FILE_NAME = "dthfish_keyset.json";
+    private static TinkManager sInstance;
+
+    private KeysetHandle mKeysetHandle;
     private AtomicInteger mTry;
 
     private TinkManager(Context context) {
@@ -47,12 +46,11 @@ public class TinkManager {
             e.printStackTrace();
         }
         mTry = new AtomicInteger();
-        mContext = context.getApplicationContext();
+        final File keysetFile = new File(context.getFilesDir(), FILE_NAME);
         Observable.create(new ObservableOnSubscribe<KeysetHandle>() {
             @Override
             public void subscribe(ObservableEmitter<KeysetHandle> emitter) throws Exception {
                 mTry.getAndIncrement();
-                File keysetFile = new File(mContext.getFilesDir(), FILE_NAME);
                 KeysetHandle keysetHandle = null;
                 // read
                 if (keysetFile.exists()) {
