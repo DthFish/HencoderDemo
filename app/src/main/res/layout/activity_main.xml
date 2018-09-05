@@ -89,6 +89,12 @@
             android:layout_height="wrap_content"
             android:text="TouchAnimLayout" />
 
+        <Button
+            android:id="@+id/btn_to_tink"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tink" />
+
 
     </LinearLayout>
 
