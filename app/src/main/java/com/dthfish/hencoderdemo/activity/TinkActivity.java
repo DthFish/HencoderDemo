@@ -25,33 +25,30 @@ public class TinkActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 final String origin = mTv.getText().toString();
-                if (!TextUtils.isEmpty(origin))
-                    TinkManager.getInstance(TinkActivity.this).encrypt(origin, new TinkManager.Callback() {
-                        @Override
-                        public void onSuccess(String text) {
-                            mCipherText = text;
-                            mTvResult.append("\n加密：" + origin + "\n结果：" + text);
-                        }
-                    });
-
-            }
-        });
-        findViewById(R.id.btn_decrypt).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!TextUtils.isEmpty(mCipherText)) {
-                    TinkManager.getInstance(TinkActivity.this).decrypt(mCipherText, new TinkManager.Callback() {
-                        @Override
-                        public void onSuccess(String text) {
-                            mTvResult.append("\n解密：" + mCipherText + "\n结果：" + text);
-                        }
-                    });
+                if (!TextUtils.isEmpty(origin)) {
+                    String text = TinkManager.getInstance(TinkActivity.this).encrypt(origin);
+                    mCipherText = text;
+                    mTvResult.append("\n加密：" + origin + "\n结果：" + text);
                 }
 
             }
         });
 
+        findViewById(R.id.btn_decrypt).
+
+                setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!TextUtils.isEmpty(mCipherText)) {
+                            String text = TinkManager.getInstance(TinkActivity.this).decrypt(mCipherText);
+                            mTvResult.append("\n解密：" + mCipherText + "\n结果：" + text);
+                        }
+
+                    }
+                });
+
         mTvResult = findViewById(R.id.tv_encrypt_result);
+
         findViewById(R.id.btn_clean).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
