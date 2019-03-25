@@ -89,7 +89,6 @@ public class AnimationButton extends FrameLayout {
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-                ivFront.setVisibility(View.VISIBLE);
 
             }
 
@@ -120,6 +119,7 @@ public class AnimationButton extends FrameLayout {
         });
 
         needResume = true;
+        ivFront.setVisibility(View.VISIBLE);
         ivFront.startAnimation(animation);
     }
 
