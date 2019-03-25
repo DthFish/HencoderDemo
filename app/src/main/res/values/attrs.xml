@@ -12,4 +12,9 @@
         <attr name="translationXRatio" format="float" />
         <attr name="translationYRatio" format="float" />
     </declare-styleable>
+
+    <declare-styleable name="AnimationButton">
+        <attr name="backgroundIcon" format="reference" />
+        <attr name="foregroundIcon" format="reference" />
+    </declare-styleable>
 </resources>

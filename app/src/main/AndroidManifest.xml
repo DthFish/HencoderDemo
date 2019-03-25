@@ -41,7 +41,8 @@
         <activity android:name=".activity.ScalableImageActivity" />
         <activity android:name=".activity.PagerViewActivity" />
         <activity android:name=".activity.TouchAnimActivity" />
-        <activity android:name=".activity.TinkActivity"></activity>
+        <activity android:name=".activity.TinkActivity"/>
+        <activity android:name=".activity.AnimationButtonActivity"/>
     </application>
 
 </manifest>
