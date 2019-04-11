@@ -14,6 +14,7 @@ import com.dthfish.hencoderdemo.activity.MaterialEditTextActivity;
 import com.dthfish.hencoderdemo.activity.PagerViewActivity;
 import com.dthfish.hencoderdemo.activity.ParagraphActivity;
 import com.dthfish.hencoderdemo.activity.PieChartActivity;
+import com.dthfish.hencoderdemo.activity.RippleButtonActivity;
 import com.dthfish.hencoderdemo.activity.ScalableImageActivity;
 import com.dthfish.hencoderdemo.activity.SportActivity;
 import com.dthfish.hencoderdemo.activity.TagLayoutActivity;
@@ -42,6 +43,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        findViewById(R.id.btn_to_ripple_btn).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, RippleButtonActivity.class));
+            }
+        });
         findViewById(R.id.btn_to_dash).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

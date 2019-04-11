@@ -11,6 +11,12 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btn_to_ripple_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RippleButton" />
+
+        <Button
             android:id="@+id/btn_to_dash"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

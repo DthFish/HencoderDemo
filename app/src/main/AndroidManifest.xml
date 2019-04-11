@@ -9,6 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".activity.RippleButtonActivity"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -41,8 +42,8 @@
         <activity android:name=".activity.ScalableImageActivity" />
         <activity android:name=".activity.PagerViewActivity" />
         <activity android:name=".activity.TouchAnimActivity" />
-        <activity android:name=".activity.TinkActivity"/>
-        <activity android:name=".activity.AnimationButtonActivity"/>
+        <activity android:name=".activity.TinkActivity" />
+        <activity android:name=".activity.AnimationButtonActivity" />
     </application>
 
 </manifest>
