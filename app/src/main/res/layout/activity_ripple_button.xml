@@ -7,7 +7,6 @@
 
     <com.dthfish.hencoderdemo.view.RippleButton
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:clickable="true" />
+        android:layout_height="wrap_content" />
 
 </FrameLayout>

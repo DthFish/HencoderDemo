@@ -10,12 +10,13 @@ import android.graphics.Paint;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.dthfish.hencoderdemo.R;
-import com.dthfish.hencoderdemo.Utils;
 
 import java.util.LinkedList;
 
@@ -36,8 +37,10 @@ public class RippleButton extends FrameLayout implements View.OnClickListener {
     private ImageView imageView;
     // 波纹起始透明度
     private float rippleStartAlpha = 0.4f;
-    // 这里的比例是图片里面的圆半径和圆边到空间边框的距离的比例
-    private float spaceProportion = 0.2f;
+    // 这里的比例是图片里面的圆半径和图片边框的距离的比例
+    private float originProportion = 0.2f;
+    // 这里的比例是图片里面的圆半径和圆边到控件边框的距离的比例
+    private float spaceProportion = originProportion;
     private float imageProportion = 1 - spaceProportion;
 
     public RippleButton(@NonNull Context context) {
@@ -55,7 +58,9 @@ public class RippleButton extends FrameLayout implements View.OnClickListener {
         imageView.setBackgroundColor(Color.TRANSPARENT);
         imageView.setClickable(true);
         imageView.setImageResource(R.drawable.bg_ripple_selector);
-        addView(imageView, new LayoutParams((int) Utils.dpToPx(200), (int) Utils.dpToPx(200)));
+        FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        params.gravity = Gravity.CENTER;
+        addView(imageView, params);
         setOnClickListener(null);
         setWillNotDraw(false);
 
@@ -112,12 +117,20 @@ public class RippleButton extends FrameLayout implements View.OnClickListener {
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(final int w, final int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
-        centerX = w / 2;
-        centerY = h / 2;
-        radius = Math.min(w, h) / 2;
-
+        imageView.post(new Runnable() {
+            @Override
+            public void run() {
+                centerX = w / 2;
+                centerY = h / 2;
+                radius = Math.min(w, h) / 2;
+                int imgRadius = imageView.getWidth() / 2;
+                float circleRadius = imgRadius * (1 - originProportion);
+                imageProportion = circleRadius / radius;
+                spaceProportion = 1 - imageProportion;
+            }
+        });
     }
 
     @Override
